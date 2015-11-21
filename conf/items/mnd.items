@@ -84,6 +84,7 @@ Dimmer CT_Dimm_3  "right bulb"  (CTDimmer)      {hue="3;colorTemperature;30"}
 Switch Power                         "Benq Power"                                     (GH_Living)  /* { epsonprojector="hometheater:Power:60000" }     */
 String Source                        "Benq Source"                                    (GH_Living)  /* { epsonprojector="hometheater:Source:ON,60000" } */
 Number LampTime                      "Benq Lamptime"                                  (GH_Living)  /* { epsonprojector="<hometheater:LampTime:60000" } */
+Number Temperature_Salon             "Salon Temperature [%.1f °C]"      <temperature> (GH_Living) { mqtt="<[mosquitto:@@WEATHER_LOCATION@@/salon/temp_c:state:default]" }
 
 /* Heating */
 Switch Heating_GH_Corridor           "GH Corridor"     <heating>    (GH_Corridor, Heating)
@@ -112,8 +113,8 @@ Number  Weather_Humidex         "Humidex [SCALE(humidex.scale):%s]"             
 Number  Weather_Temp_Max        "Todays Maximum [%.1f °C]"        <temperature> (Weather_Chart)
 Number  Weather_Temp_Min        "Todays Minimum [%.1f °C]"        <temperature> (Weather_Chart)
 Number  Weather_Chart_Period    "Chart Period"
-DateTime Weather_LastUpdate     "Last Update [%1$ta %1$tR]"       <clock>
-Number  Temperature_Salon       "Salon Temperature [%.1f °C]"     <temperature> (GH_Living) { mqtt="<[mosquitto:@@WEATHER_LOCATION@@/salon/temp_c:state:default]" }
+String  lu                      "Last Update  [%s]"               <clock>                        { mqtt="<[mosquitto:weather/@@WEATHER_LOCATION@@/conditions/lastupdate_datetime:state:default]" }
+
 
 /* NTP binding demo item */
 DateTime        Date            "Date [%1$tA, %1$td.%1$tm.%1$tY]" <calendar>                     { ntp="@@TZ@@:fr_CH" }

@@ -83,10 +83,7 @@ done <$CONFIG_FILE
 
 #cowsay "config ready to be transferred: ${TEMP_DIR}"
 
-echo "Executing: rsync -avz --exclude '.git' -e ${SSH_CMD} \"${TEMP_DIR}/\" ${CONNECTION}:\"${REMOTE_DIR}\""
-rsync -avz --exclude '.git' -e $SSH_CMD "$TEMP_DIR/" ${CONNECTION}:${REMOTE_DIR}
+echo "Executing: rsync -avz --quiet --exclude '.git' -e ${SSH_CMD} \"${TEMP_DIR}/conf\" ${CONNECTION}:\"${REMOTE_DIR}\""
+rsync -avz --quiet --exclude '.git' -e $SSH_CMD "$TEMP_DIR/conf/" ${CONNECTION}:${REMOTE_DIR}
 
-#ssh ${CONNECTION} 'bash -s' < link-addons.sh
-
-
-#rm -rf $TEMP_DIR
+rm -rf $TEMP_DIR
