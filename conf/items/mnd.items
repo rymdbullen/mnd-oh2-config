@@ -1,0 +1,133 @@
+Group All
+Group gH                (All)
+Group gAlarm            (All)
+Group gPresence         (All)
+Group Outdoor           (All)
+Group Shutters          (All)
+Group Weather           (All)
+Group Status            (All)
+Group Sonos             (All)
+Group Sonos2            (All)
+
+Group GH_Living      "Living Room"     <video>        (gH)
+Group GH_Kitchen     "Kitchen"         <kitchen>      (gH)
+Group GH_Toilet      "Toilet"          <bath>         (gH)
+Group GH_Dusch       "Dusch"           <bath>         (gH)
+Group GH_Bathroom    "Bathroom"        <bath>         (gH)
+Group GH_Corridor    "Corridor"        <corridor>     (gH)
+Group GH_Bed_Master  "Bedroom Master"  <bedroom>      (gH)
+Group GH_Bed_Verte   "Bedroom Verte"   <bedroom>      (gH)
+Group GH_Bed_Azure   "Bedroom Azure"   <bedroom>      (gH)
+Group GH_Bed_Jaune   "Bedroom Jaune"   <bedroom>      (gH)
+
+
+/* active groups */
+Group:Switch:OR(ON, OFF)           Lights         "All Lights [(%d)]"                                   (All)
+Group:Switch:OR(ON, OFF)           Heating        "No. of Active Heatings [(%d)]"      <heating>        (All)
+Group:Number:AVG                   Temperature    "Avg. Room Temperature [%.1f °C]"    <temperature>    (Status)
+Group:Contact:OR(OPEN, CLOSED)     Windows        "Open windows [(%d)]"                <contact>        (All)
+
+
+/* Sonos */
+Switch ledstatus      "LedStatus"          (Sonos)   {sonos="[ON:living:led], [OFF:living:led]", autoupdate="false"}
+String currenttrack   "CurrentTrack [%s]"  (Sonos)   {sonos="[@@SONOS_LIVING_UDN@@:currenttrack]", autoupdate="false"}
+String radiostation   "RadioStation [%s]"  (Sonos)   {sonos="[living:radio]", autoupdate="false"}
+Switch PlayLivingRoom "Play/Pause"         (Sonos)   {sonos="[ON:living:play],[OFF:living:pause]"}
+Switch next           "Next track"         (Sonos)   {sonos="[ON:living:next]"}
+
+Switch ledstatus      "LedStatus"          (Sonos2)   {sonos="[ON:living2:led], [OFF:living:led]", autoupdate="false"}
+String currenttrack   "CurrentTrack [%s]"  (Sonos2)   {sonos="[@@SONOS_LIVING2_UDN@@:currenttrack]", autoupdate="false"}
+String radiostation   "RadioStation [%s]"  (Sonos2)   {sonos="[living2:radio]", autoupdate="false"}
+Switch PlayLivingRoom "Play/Pause"         (Sonos2)   {sonos="[ON:living2:play],[OFF:living:pause]"}
+Switch next           "Next track"         (Sonos2)   {sonos="[ON:living2:next]"}
+
+
+/* KODI */
+String    XbmcLiving_State              "Living State [%s]"                     { xbmc="<[#living|Player.State]" }
+String    XbmcLiving_Title              "Living Title [%s]"                     { xbmc="<[#living|Player.Title]" }
+String    XbmcLiving_ShowTitle          "Living Show [%s]"                      { xbmc="<[#living|Player.ShowTitle]" }
+String    XbmcLiving_Fanart             "Living Fanart [%s]"                    { xbmc="<[#living|Player.Fanart]" }
+String    XbmcLiving_Artist             "Living Artist [%s]"                    { xbmc="<[#living|Player.Artist]" }
+String    XbmcLiving_Album              "Living Album [%s]"                     { xbmc="<[#living|Player.Album]" }
+Switch    XbmcLiving_PlayPause          "Living Play/Pause"                     { xbmc=">[#living|Player.PlayPause]", autoupdate="false" }
+Switch    XbmcLiving_Stop               "Living Stop"                           { xbmc=">[#living|Player.Stop]", autoupdate="false" }
+String    XbmcLiving_Notify             "Living Notify [%s]"                    { xbmc="<[#living|GUI.ShowNotification]", autoupdate="false" }
+Dimmer    XbmxLiving_Volume             "XBMC Volume [%.1f]"         (XBMC)     { xbmc="=[#living|Application.Volume]" }
+
+
+
+/* Lights */
+/* Switch Light_Outdoor_Pool    "Pool Spotlight"                                      (Outdoor, Lights) */
+Dimmer Light_Outdoor_Pool       "Dimmer [%d %%]"                       <slider>       (Outdoor, Lights)           { zwave="9:command=switch_multilevel,restore_last_value=true" }
+Number Light_Outdoor_Pool_cons  "PoolDimmer [%.3f kWh]"                <energy>       (Outdoor, Lights)           { zwave="9:command=meter" }
+Switch Light_Outdoor_Terrace    "Terrace"                                             (Outdoor, Lights)
+Switch Light_Outdoor_Frontdoor  "Frontdoor"                                           (Outdoor, Lights)
+
+/* HUE */
+Switch Toggle_1   "left bulb"   (Switching)     {hue="1"}
+Switch Toggle_2   "center bulb" (Switching)     {hue="2"}
+Switch Toggle_3   "right bulb"  (Switching)     {hue="3"}
+
+Color Color_1     "left bulb"   (Colorize)      {hue="1"}
+Color Color_2     "center bulb" (Colorize)      {hue="2"}
+Color Color_3     "right bulb"  (Colorize)      {hue="3"}
+
+Dimmer Dimm_1     "left bulb"   (WhiteDimmer)   {hue="1;brightness;30"}
+Dimmer Dimm_2     "center bulb" (WhiteDimmer)   {hue="2;brightness;30"}
+Dimmer Dimm_3     "right bulb"  (WhiteDimmer)   {hue="3;brightness;30"}
+
+Dimmer CT_Dimm_1  "left bulb"   (CTDimmer)      {hue="1;colorTemperature;30"}
+Dimmer CT_Dimm_2  "center bulb" (CTDimmer)      {hue="2;colorTemperature;30"}
+Dimmer CT_Dimm_3  "right bulb"  (CTDimmer)      {hue="3;colorTemperature;30"}
+
+
+Switch Power                         "Benq Power"                                     (GH_Living)  /* { epsonprojector="hometheater:Power:60000" }     */
+String Source                        "Benq Source"                                    (GH_Living)  /* { epsonprojector="hometheater:Source:ON,60000" } */
+Number LampTime                      "Benq Lamptime"                                  (GH_Living)  /* { epsonprojector="<hometheater:LampTime:60000" } */
+
+/* Heating */
+Switch Heating_GH_Corridor           "GH Corridor"     <heating>    (GH_Corridor, Heating)
+
+
+/* Rollershutters */
+Switch Shutter_all (Shutters)
+
+Rollershutter Shutter_GH_Terrace     "Terrace Store"                            (Outdoor, Shutters)
+
+
+/* Windows */
+Contact Window_GH_Frontdoor     "Frontdoor [MAP(en.map):%s]"                    (GH_Corridor, Windows)
+Contact Garage_Door             "Garage Door [MAP(en.map):%s]"                  (Outdoor, Windows)
+
+
+Group Weather_Chart                                                             (Weather)
+Group Weather_Chart                                                             (Weather)
+String  Weather_Forecast_0      "Today [%s]"                      <wp0>                          { mqtt="<[mosquitto:weather/@@WEATHER_LOCATION@@/forecast/0/day/icon:state:default]" }
+String  Weather_Forecast_1      "Tonight [%s]"                    <wp1>                          { mqtt="<[mosquitto:weather/@@WEATHER_LOCATION@@/forecast/1/night/icon:state:default]" }
+String  Weather_Forecast_2      "Tomorrow day [%s]"               <wp2>                          { mqtt="<[mosquitto:weather/@@WEATHER_LOCATION@@/forecast/2/day/icon:state:default]" }
+String  Weather_Forecast_3      "Tomorrow night [%s]"             <wp3>                          { mqtt="<[mosquitto:weather/@@WEATHER_LOCATION@@/forecast/3/night/icon:state:default]" }
+Number  Weather_Temperature     "Outside Temperature [%.1f °C]"   <temperature> (Weather_Chart)  { mqtt="<[mosquitto:weather/@@WEATHER_LOCATION@@/conditions/temp_c:state:default]" }
+Number  Weather_Humidity        "Outside Humidity [%.1f %%]"      <temperature> (Weather)        { mqtt="<[mosquitto:weather/@@WEATHER_LOCATION@@/conditions/relative_humidity:state:default]" }
+Number  Weather_Humidex         "Humidex [SCALE(humidex.scale):%s]"             (Weather)
+Number  Weather_Temp_Max        "Todays Maximum [%.1f °C]"        <temperature> (Weather_Chart)
+Number  Weather_Temp_Min        "Todays Minimum [%.1f °C]"        <temperature> (Weather_Chart)
+Number  Weather_Chart_Period    "Chart Period"
+DateTime Weather_LastUpdate     "Last Update [%1$ta %1$tR]"       <clock>
+Number  Temperature_Salon       "Salon Temperature [%.1f °C]"     <temperature> (GH_Living) { mqtt="<[mosquitto:@@WEATHER_LOCATION@@/salon/temp_c:state:default]" }
+
+/* NTP binding demo item */
+DateTime        Date            "Date [%1$tA, %1$td.%1$tm.%1$tY]" <calendar>                     { ntp="Europe/Zurich:fr_CH" }
+
+/* Demo items */
+Switch DemoSwitch               "Switch"
+Dimmer DimmedLight              "Dimmer [%d %%]"                  <slider>
+Color  RGBLight                 "RGB Light"                       <slider>
+Rollershutter DemoShutter       "Roller Shutter"
+Dimmer DemoBlinds               "Blinds [%d %%]"                  <rollershutter>
+Number Scene_General            "Scene"                           <sofa>
+Number Radio_Station            "Radio"                           <network>
+Dimmer Volume                   "Volume [%.1f %%]"
+Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>
+
+String UnknownDevices    "Unknown Devices in Range: [%s]" { bluetooth="?" }
+Number NoOfPairedDevices "Paired Devices in Range: [%d]"  { bluetooth="!" }
