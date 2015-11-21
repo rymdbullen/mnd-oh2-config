@@ -51,14 +51,8 @@ if [ ! -d $LOCAL_DIR/sitemaps ]; then
   echo "${LOCAL_DIR}/sitemaps doesn't exist"
   exit 1
 fi
-#if [ ! -f $LOCAL_DIR/openhab.cfg ]; then
-#  echo "${LOCAL_DIR}/openhab.cfg doesn't exist"
-#  exit 1
-#fi
 
 echo "Config for the connection: $CONNECTION" >&2
-#echo "Config for the IPCAM_FIX_URL: $IPCAM_FIX_URL" >&2
-#echo "Config for the IPCAM_DYN_URL: $IPCAM_DYN_URL" >&2
 
 git fetch
 git pull
@@ -90,9 +84,9 @@ done <$CONFIG_FILE
 #cowsay "config ready to be transferred: ${TEMP_DIR}"
 
 echo "Executing: rsync -avz --exclude '.git' -e ${SSH_CMD} \"${TEMP_DIR}/\" ${CONNECTION}:\"${REMOTE_DIR}\""
-rsync -avz --quiet --exclude '.git' -e $SSH_CMD "$TEMP_DIR/" ${CONNECTION}:${REMOTE_DIR}
+rsync -avz --exclude '.git' -e $SSH_CMD "$TEMP_DIR/" ${CONNECTION}:${REMOTE_DIR}
 
 #ssh ${CONNECTION} 'bash -s' < link-addons.sh
 
 
-rm -rf $TEMP_DIR
+#rm -rf $TEMP_DIR
