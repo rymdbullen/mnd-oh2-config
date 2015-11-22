@@ -1,4 +1,4 @@
-sitemap demo label="Main Menu"
+sitemap mnd label="Montriond Menu"
 {
 	Frame {
 		Group          item=GH_Living         label="Montriond"            icon="house"

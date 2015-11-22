@@ -115,7 +115,7 @@ then
 end
 
 /** shows how to use sensor values from the past */
-rule "Persistence Demo"
+rule "Persistence Weather_Temperature"
 when
 	Time cron "0 * * * * ?"
 then	
@@ -128,7 +128,7 @@ end
  * shows how to check recent switch states - very helpful to avoid executing something too often, just
  * because somebody presses a button too often (e.g. sending a notification, if the doorbell button is pressed)
  */
-rule "Persistence Demo 2"
+rule "Persistence DemoSwitch"
 when
 	Item DemoSwitch received command
 then
